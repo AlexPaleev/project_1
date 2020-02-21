@@ -8,14 +8,14 @@ class Dev_projectService {
   private dev_projectRepository = getRepository(Dev_project);
   private devRepository = getRepository(User);
 
-  public createDev_project = async (request: express.Request) => {
-    const dev_projectData: Dev_project = request.body;
+  public createDev_project = async (body) => {
+    const dev_projectData: Dev_project = body;
     const newDev_project = this.dev_projectRepository.create(dev_projectData);
     await this.dev_projectRepository.save(newDev_project);
     return newDev_project;
   }
 
-  public getAllDev_projects = async (request: express.Request) => {
+  public getAllDev_projects = async () => {
     const users = await this.dev_projectRepository.find();
     return users;
   }
@@ -43,8 +43,8 @@ class Dev_projectService {
     }
   }
  
-  public deleteDev_project = async (request: express.Request) => {
-    const id = request.params.id;
+  public deleteDev_project = async (params) => {
+    const id = params.id;
     const deleteResponse = await this.dev_projectRepository.delete(id);
     if (deleteResponse.affected !== 0) {
       return 200;

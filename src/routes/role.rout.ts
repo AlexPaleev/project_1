@@ -15,8 +15,6 @@ class RoleRout implements Controller {
   private initializeRoutes() {
     this.router.post(this.path, this.controll.CallCreateRole);
     this.router.get(this.path, this.controll.CallGetAllRoles);
-    this.router.get(`${this.path}/:id`, this.controll.CallGetRoleById);
-    this.router.patch(`${this.path}/:id`, this.controll.CallModifyRole);
     this.router.delete(`${this.path}/:id`, this.controll.CallDeleteRole);
   }
 }

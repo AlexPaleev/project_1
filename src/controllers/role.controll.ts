@@ -11,18 +11,8 @@ class RoleController {
   }
  
   public CallGetAllRoles = async (request: express.Request, response: express.Response) => {
-    let projects = await this.service.getAllRoles(request.body);
+    let projects = await this.service.getAllRoles();
     response.send(projects);
-  }
- 
-  public CallGetRoleById = async (request: express.Request, response: express.Response) => {
-    let project = await this.service.getRoleById(request.body);
-    response.send(project);
-  }
- 
-  public CallModifyRole = async (request: express.Request, response: express.Response) => {
-    let updatedProject = await this.service.modifyRole(request.body);
-    response.send(updatedProject);
   }
  
   public CallDeleteRole = async (request: express.Request, response: express.Response, next: express.NextFunction) => {

@@ -10,7 +10,7 @@ class Dev_projectController {
   }
  
   public CallGetAllDev_projects = async (request: express.Request, response: express.Response) => {
-    let projects = await this.service.getAllDev_projects(request.body);
+    let projects = await this.service.getAllDev_projects();
     response.send(projects);
   }
  
@@ -25,7 +25,7 @@ class Dev_projectController {
   }
  
   public CallDeleteDev_project = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
-    let deleteResponse = await this.service.deleteDev_project(request.body);
+    let deleteResponse = await this.service.deleteDev_project(request.params);
     response.send(deleteResponse);
   }
 }

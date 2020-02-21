@@ -11,23 +11,13 @@ class Users_roleController {
   }
  
   public CallGetAllUser_roles = async (request: express.Request, response: express.Response) => {
-    let projects = await this.service.getAllUser_roles(request.body);
-    response.send(projects);
+    let User_role = await this.service.getAllUser_roles();
+    response.send(User_role);
   }
  
   public CallGetUser_roleById = async (request: express.Request, response: express.Response) => {
-    let project = await this.service.getUser_roleById(request.body);
-    response.send(project);
-  }
- 
-  public CallModifyUser_role = async (request: express.Request, response: express.Response) => {
-    let updatedProject = await this.service.modifyUser_role(request.body);
-    response.send(updatedProject);
-  }
- 
-  public CallDeleteUser_role = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
-    let deleteResponse = await this.service.deleteUser_role(request.body);
-    response.send(deleteResponse);
+    let User_role = await this.service.getUser_roleById(request.body);
+    response.send(User_role);
   }
 }
  

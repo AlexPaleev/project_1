@@ -11,12 +11,12 @@ class UserController {
   }
  
   public CallGetAllUsers = async (request: express.Request, response: express.Response) => {
-    let projects = await this.service.getAllUsers(request.body);
-    response.send(projects);
+    let users = await this.service.getAllUsers();
+    response.send(users);
   }
  
-  public CallGetUserById = async (request: express.Request, response: express.Response) => {
-    let project = await this.service.getUserById(request.body);
+  public CallGetAllDev = async (request: express.Request, response: express.Response) => {
+    let project = await this.service.getAllDev();
     response.send(project);
   }
  

@@ -8,28 +8,18 @@ class ProjectService {
     private projectRepository = getRepository(Project);
     private pmRepository = getRepository(User);
 
-  public createProject = async (request: express.Request) => {
-    const projectData: CreateProjectDto = request.body;
+  public createProject = async (body) => {
+    const projectData: CreateProjectDto = body;
     const newProject = this.projectRepository.create(projectData);
     await this.projectRepository.save(newProject);
     return newProject;
   }
  
-  public getAllProjects = async (request: express.Request) => {
+  public getAllProjects = async () => {
     const projects = await this.projectRepository.find();
     return projects;
   }
  
-  // public getProjectById = async (request: express.Request) => {
-  //   const id = request.params.id;
-  //   const project = await this.projectRepository.findOne(id);
-  //   if (project) {
-  //     return project;
-  //   } else {
-  //     // next(new ProjectNotFoundException(id));
-  //     return "not found";
-  //   }
-  // }
   public getProjectById = async (request: express.Request) => {
     const id = request.params.id;
     const pm = await this.pmRepository.findOne(id);
@@ -55,8 +45,8 @@ class ProjectService {
     }
   }
  
-  public deleteProject = async (request: express.Request) => {
-    const id = request.params.id;
+  public deleteProject = async (params) => {
+    const id = params.id;
     const deleteResponse = await this.projectRepository.delete(id);
     if (deleteResponse.affected !== 0) {
       return 200;
