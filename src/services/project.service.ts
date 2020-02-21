@@ -1,53 +1,68 @@
 import * as express from 'express';
 import { getRepository } from 'typeorm';
-import ProjectNotFoundException from '../exceptions/ProjectNotFoundException';
 import CreateProjectDto from '../dto/project.dto';
 import Project from '../models/project.entity';
+import User from '../models/user.entity';
  
 class ProjectService {
     private projectRepository = getRepository(Project);
+    private pmRepository = getRepository(User);
 
-  public createProject = async (request: express.Request, response: express.Response) => {
+  public createProject = async (request: express.Request) => {
     const projectData: CreateProjectDto = request.body;
     const newProject = this.projectRepository.create(projectData);
     await this.projectRepository.save(newProject);
-    response.send(newProject);
+    return newProject;
   }
  
-  public getAllProjects = async (request: express.Request, response: express.Response) => {
+  public getAllProjects = async (request: express.Request) => {
     const projects = await this.projectRepository.find();
-    response.send(projects);
+    return projects;
   }
  
-  public getProjectById = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+  // public getProjectById = async (request: express.Request) => {
+  //   const id = request.params.id;
+  //   const project = await this.projectRepository.findOne(id);
+  //   if (project) {
+  //     return project;
+  //   } else {
+  //     // next(new ProjectNotFoundException(id));
+  //     return "not found";
+  //   }
+  // }
+  public getProjectById = async (request: express.Request) => {
     const id = request.params.id;
-    const project = await this.projectRepository.findOne(id);
+    const pm = await this.pmRepository.findOne(id);
+    const project = await this.projectRepository.find({pm_: pm});
     if (project) {
-      response.send(project);
+      return project;
     } else {
-      next(new ProjectNotFoundException(id));
+      // next(new ProjectNotFoundException(id));
+      return "Error: not found";
     }
   }
  
-  public modifyProject = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+  public modifyProject = async (request: express.Request) => {
     const id = request.params.id;
     const projectData: Project = request.body;
     await this.projectRepository.update(id, projectData);
     const updatedProject = await this.projectRepository.findOne(id);
     if (updatedProject) {
-      response.send(updatedProject);
+      return updatedProject;
     } else {
-      next(new ProjectNotFoundException(id));
+      // next(new ProjectNotFoundException(id));
+      return "Error: not found";
     }
   }
  
-  public deleteProject = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+  public deleteProject = async (request: express.Request) => {
     const id = request.params.id;
     const deleteResponse = await this.projectRepository.delete(id);
-    if (deleteResponse.raw[1]) {
-      response.sendStatus(200);
+    if (deleteResponse.affected !== 0) {
+      return 200;
     } else {
-      next(new ProjectNotFoundException(id));
+      // next(new ProjectNotFoundException(id));
+      return "Error: not found";
     }
   }
 }

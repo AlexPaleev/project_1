@@ -6,47 +6,47 @@ import Role from '../models/role.entity';
 class RoleService {
   private roleRepository = getRepository(Role);
 
-  public createRole = async (request: express.Request, response: express.Response) => {
+  public createRole = async (request: express.Request) => {
     const roleData: Role = request.body;
     const newRole = this.roleRepository.create(roleData);
     await this.roleRepository.save(newRole);
-    response.send(newRole);
+    return newRole;
   }
 
-  public getAllRoles = async (request: express.Request, response: express.Response) => {
+  public getAllRoles = async (request: express.Request) => {
     const roles = await this.roleRepository.find();
-    response.send(roles);
+    return roles;
   }
 
-  public getRoleById = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+  public getRoleById = async (request: express.Request) => {
     const id = request.params.id;
     const role = await this.roleRepository.findOne(id);
     if (role) {
-      response.send(role);
+      return role;
     } else {
-      response.send('Error: Not found id');
+      return 'Error: Not found id';
     }
   }
  
-  public modifyRole = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+  public modifyRole = async (request: express.Request) => {
     const id = request.params.id;
     const roleData: Role = request.body;
     await this.roleRepository.update(id, roleData);
     const updatedRole = await this.roleRepository.findOne(id);
     if (updatedRole) {
-      response.send(updatedRole);
+      return updatedRole;
     } else {
-      response.send('Error: No modify');
+      return 'Error: No modify';
     }
   }
  
-  public deleteRole = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+  public deleteRole = async (request: express.Request) => {
     const id = request.params.id;
     const deleteResponse = await this.roleRepository.delete(id);
-    if (deleteResponse.raw[1]) {
-      response.sendStatus(200);
+    if (deleteResponse.affected !== 0) {
+      return 200;
     } else {
-      response.send('Error: No delete');
+      return 'Error: No delete';
     }
   }
 }

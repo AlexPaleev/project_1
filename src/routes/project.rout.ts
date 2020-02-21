@@ -2,24 +2,24 @@ import * as express from 'express';
 import Controller from '../interfaces/controller.interface';
 import validationMiddleware from '../middleware/validation.middleware';
 import CreateProjectDto from '../dto/project.dto';
-import ProjectService from '../services/project.service';
+import ProjectController from '../controllers/project.controll';
  
-class ProjectController implements Controller {
-  public path = '/projects';
+class ProjectRout implements Controller {
+  public path = '/project';
   public router = express.Router();
-  private service: ProjectService = new ProjectService();
+  private controller: ProjectController = new ProjectController();
 
   constructor() {
     this.initializeRoutes();
   }
  
   private initializeRoutes() {
-    this.router.post(this.path, validationMiddleware(CreateProjectDto), this.service.createProject);
-    this.router.get(this.path, this.service.getAllProjects);
-    this.router.get(`${this.path}/:id`, this.service.getProjectById);
-    this.router.patch(`${this.path}/:id`, validationMiddleware(CreateProjectDto), this.service.modifyProject);
-    this.router.delete(`${this.path}/:id`, this.service.deleteProject);
+    this.router.post(this.path, validationMiddleware(CreateProjectDto), this.controller.CallCreateProject);
+    this.router.get(this.path, this.controller.CallGetAllProjects);
+    this.router.get(`${this.path}/:id`, this.controller.CallGetProjectById);
+    this.router.patch(`${this.path}/:id`, validationMiddleware(CreateProjectDto), this.controller.CallModifyProject);
+    this.router.delete(`${this.path}/:id`, this.controller.CalldeleteProject);
   }
 }
  
-export default ProjectController;
+export default ProjectRout;

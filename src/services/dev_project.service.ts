@@ -2,51 +2,54 @@ import * as express from 'express';
 import { getRepository } from 'typeorm';
 // import CreateDev_projectDto from '../dto/dev_project.dto';
 import Dev_project from '../models/dev_project.entity';
+import User from '../models/user.entity';
 
 class Dev_projectService {
   private dev_projectRepository = getRepository(Dev_project);
+  private devRepository = getRepository(User);
 
-  public createDev_project = async (request: express.Request, response: express.Response) => {
+  public createDev_project = async (request: express.Request) => {
     const dev_projectData: Dev_project = request.body;
     const newDev_project = this.dev_projectRepository.create(dev_projectData);
     await this.dev_projectRepository.save(newDev_project);
-    response.send(newDev_project);
+    return newDev_project;
   }
 
-  public getAllDev_projects = async (request: express.Request, response: express.Response) => {
+  public getAllDev_projects = async (request: express.Request) => {
     const users = await this.dev_projectRepository.find();
-    response.send(users);
+    return users;
   }
 
-  public getDev_projectById = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+  public getDev_projectById = async (request: express.Request) => {
     const id = request.params.id;
-    const dev_project = await this.dev_projectRepository.findOne(id);
+    const dev = await this.devRepository.findOne(id);
+    const dev_project = await this.dev_projectRepository.find({dev_: dev});
     if (dev_project) {
-      response.send(dev_project);
+      return dev_project;
     } else {
-      response.send('Error: Not found id');
+      return 'Error: Not found id';
     }
   }
  
-  public modifyDev_project = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+  public modifyDev_project = async (request: express.Request) => {
     const id = request.params.id;
     const dev_projectData: Dev_project = request.body;
     await this.dev_projectRepository.update(id, dev_projectData);
     const updatedDev_project = await this.dev_projectRepository.findOne(id);
     if (updatedDev_project) {
-      response.send(updatedDev_project);
+      return updatedDev_project;
     } else {
-      response.send('Error: No modify');
+      return 'Error: No modify';
     }
   }
  
-  public deleteDev_project = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+  public deleteDev_project = async (request: express.Request) => {
     const id = request.params.id;
     const deleteResponse = await this.dev_projectRepository.delete(id);
-    if (deleteResponse.raw[1]) {
-      response.sendStatus(200);
+    if (deleteResponse.affected !== 0) {
+      return 200;
     } else {
-      response.send('Error: No delete');
+      return 'Error: No delete';
     }
   }
 }

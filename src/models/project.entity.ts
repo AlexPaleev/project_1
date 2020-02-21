@@ -1,7 +1,6 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import User from './user.entity';
 import DevProject from './dev_project.entity';
-
  
 @Entity()
 class Project {

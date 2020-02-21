@@ -3,11 +3,11 @@ import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import App from './app';
 import config from './ormconfig';
-import UsersController from './routes/user.rout';
-import ProjectController from './routes/project.rout';
-import Dev_projectController from './routes/dev_project.rout';
-import Users_roleController from './routes/user_role.rout';
-import RoleController from './routes/role.rout';
+import UserRout from './routes/user.rout';
+import ProjectRout from './routes/project.rout';
+import Dev_projectRout from './routes/dev_project.rout';
+import Users_roleRout from './routes/user_role.rout';
+import RoleRout from './routes/role.rout';
  
 (async () => {
   try {
@@ -18,11 +18,11 @@ import RoleController from './routes/role.rout';
   }
   const app = new App(
     [
-      new UsersController, 
-      new ProjectController,
-      new Dev_projectController,
-      new Users_roleController,
-      new RoleController
+      new UserRout, 
+      new ProjectRout,
+      new Dev_projectRout,
+      new Users_roleRout,
+      new RoleRout
     ],
     5000
   );
