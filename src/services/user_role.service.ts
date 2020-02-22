@@ -1,6 +1,5 @@
 import * as express from 'express';
 import { getRepository } from 'typeorm';
-// import CreateUser_roleDto from '../dto/user_role.dto';
 import User_role from '../models/user_role.entity';
 
 class User_rolesService {

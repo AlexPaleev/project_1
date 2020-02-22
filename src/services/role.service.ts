@@ -1,13 +1,12 @@
 import * as express from 'express';
 import { getRepository } from 'typeorm';
-// import CreateRoleDto from '../dto/role.dto';
 import Role from '../models/role.entity';
 
 class RoleService {
   private roleRepository = getRepository(Role);
 
-  public createRole = async (request: express.Request) => {
-    const roleData: Role = request.body;
+  public createRole = async (body) => {
+    const roleData: Role = body;
     const newRole = this.roleRepository.create(roleData);
     await this.roleRepository.save(newRole);
     return newRole;

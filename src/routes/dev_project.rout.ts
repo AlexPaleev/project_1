@@ -1,6 +1,5 @@
 import * as express from 'express';
 import Controller from '../interfaces/controller.interface';
-// import CreateDev_projectDto from '../dto/dev_project.dto';
 import Dev_projectController from '../controllers/dev_project.controll';
  
 class Dev_projectRout implements Controller {
@@ -16,7 +15,6 @@ class Dev_projectRout implements Controller {
     this.router.post(this.path, this.controll.CallCreateDev_project);
     this.router.get(this.path, this.controll.CallGetAllDev_projects);
     this.router.get(`${this.path}/:id`, this.controll.CallGetDev_projectById);
-    this.router.patch(`${this.path}/:id`,  this.controll.CallModifyDev_project);
     this.router.delete(`${this.path}/:id`, this.controll.CallDeleteDev_project);
   }
 }

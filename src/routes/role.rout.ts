@@ -1,6 +1,5 @@
 import * as express from 'express';
 import Controller from '../interfaces/controller.interface';
-// import CreateRoleDto from '../dto/role.dto';
 import RoleController from '../controllers/role.controll';
  
 class RoleRout implements Controller {

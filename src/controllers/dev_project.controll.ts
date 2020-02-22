@@ -19,11 +19,6 @@ class Dev_projectController {
     response.send(project);
   }
  
-  public CallModifyDev_project = async (request: express.Request, response: express.Response) => {
-    let updatedProject = await this.service.modifyDev_project(request.body);
-    response.send(updatedProject);
-  }
- 
   public CallDeleteDev_project = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
     let deleteResponse = await this.service.deleteDev_project(request.params);
     response.send(deleteResponse);
