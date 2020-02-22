@@ -1,4 +1,3 @@
-import * as express from 'express';
 import { getRepository } from 'typeorm';
 import Dev_project from '../models/dev_project.entity';
 import User from '../models/user.entity';

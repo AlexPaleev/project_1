@@ -6,7 +6,6 @@ import config from './ormconfig';
 import UserRout from './routes/user.rout';
 import ProjectRout from './routes/project.rout';
 import Dev_projectRout from './routes/dev_project.rout';
-import Users_roleRout from './routes/user_role.rout';
 import RoleRout from './routes/role.rout';
  
 (async () => {
@@ -21,7 +20,6 @@ import RoleRout from './routes/role.rout';
       new UserRout, 
       new ProjectRout,
       new Dev_projectRout,
-      new Users_roleRout,
       new RoleRout
     ],
     5000

@@ -10,7 +10,7 @@ class Dev_project {
   @ManyToOne(() => User,(user: User) => user.Dprojects)
   public dev_: User;
 
-  @ManyToOne(() => Project,(program: Project) => program.dev_)
+  @ManyToOne(() => Project, (project: Project) => project.dev_)
   public project_: Project;
 }
  

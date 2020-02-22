@@ -16,8 +16,8 @@ class UserController {
   }
  
   public CallGetAllDev = async (request: express.Request, response: express.Response) => {
-    let project = await this.service.getAllDev();
-    response.send(project);
+    let devs = await this.service.getAllDev();
+    response.send(devs);
   }
  
   public CallModifyUser = async (request: express.Request, response: express.Response) => {

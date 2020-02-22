@@ -1,7 +1,7 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import Project from './project.entity';
-import UserRole from './user_role.entity';
 import DevProject from './dev_project.entity';
+import Role from './role.entity';
  
 @Entity()
 class User {
@@ -26,8 +26,8 @@ class User {
   @OneToMany(() => DevProject, (Dproject: DevProject) => Dproject.dev_)
   public Dprojects: DevProject[];
 
-  @OneToMany(() => UserRole, (role: UserRole) => role.user_)
-  public role_id: UserRole[];
+  @ManyToOne(() => Role, (role: Role) => role.user_)
+  public role_: Role;
 }
  
 export default User;
