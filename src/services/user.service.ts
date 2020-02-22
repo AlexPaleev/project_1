@@ -8,7 +8,7 @@ import User_role from '../models/user_role.entity';
 class UserService {
   private userRepository = getRepository(User);
   private roleRepository = getRepository(Role);
-  private user_roleRoleRepository = getRepository(User_role);
+  private user_roleRepository = getRepository(User_role);
 
   public createUser = async (body) => {
     const userData: CreateUserDto = body;
@@ -23,20 +23,33 @@ class UserService {
   }
 
   public getAllDev = async () => {
-    const role = await this.roleRepository.findOne({id: 1});
-    const users = await this.userRepository.find();
-    let dev;
-    let devs = [];
-    for (let i = 0; i < users.length; i++){
-      let user: User = users[i];
-      dev = await this.user_roleRoleRepository.find({user_:user, role_: role});
-      if (dev.length !== 0) {
-        devs.push(user);
-      } else {
-        continue;
-      }
-    }
-    return devs;
+    //const role = await this.roleRepository.findOne({ id: 1 });
+    //const users = await this.userRepository.find();
+    // let dev;
+    // let devs = [];
+    // for (let i = 0; i < users.length; i++) {
+    //   let user: User = users[i];
+    //   dev = await this.user_roleRepository.find({user_:user, role_: role});
+    //   if (dev.length !== 0) {
+    //     devs.push(user);
+    //   } else {
+    //     continue;
+    //   }
+    // }
+    // return devs;
+
+    const user_role = await this.user_roleRepository.find({ where: { role_: 1 } });
+
+    console.log(user_role)
+    
+    const users1 = user_role.map(async item => {
+      const user = await this.userRepository.findOne(item.user_)
+      return user;
+    })
+
+    const result = await Promise.all(users1)
+
+    console.log(result)
   }
  
   public modifyUser = async (params) => {
