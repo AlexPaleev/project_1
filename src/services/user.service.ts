@@ -23,33 +23,33 @@ class UserService {
   }
 
   public getAllDev = async () => {
-    //const role = await this.roleRepository.findOne({ id: 1 });
-    //const users = await this.userRepository.find();
-    // let dev;
-    // let devs = [];
-    // for (let i = 0; i < users.length; i++) {
-    //   let user: User = users[i];
-    //   dev = await this.user_roleRepository.find({user_:user, role_: role});
-    //   if (dev.length !== 0) {
-    //     devs.push(user);
-    //   } else {
-    //     continue;
-    //   }
-    // }
-    // return devs;
+    const role = await this.roleRepository.findOne({ id: 1 });
+    const users = await this.userRepository.find();
+    let dev;
+    let devs = [];
+    for (let i = 0; i < users.length; i++) {
+      let user: User = users[i];
+      dev = await this.user_roleRepository.find({user_:user, role_: role});
+      if (dev.length !== 0) {
+        devs.push(user);
+      } else {
+        continue;
+      }
+    }
+    return devs;
 
-    const user_role = await this.user_roleRepository.find({ where: { role_: 1 } });
+    // const user_role = await this.user_roleRepository.find({ where: { role_: 1 } });
 
-    console.log(user_role)
+    // console.log(user_role)
     
-    const users1 = user_role.map(async item => {
-      const user = await this.userRepository.findOne(item.user_)
-      return user;
-    })
+    // const users1 = user_role.map(async item => {
+    //   const user = await this.userRepository.findOne(item.user_)
+    //   return user;
+    // })
 
-    const result = await Promise.all(users1)
+    // const result = await Promise.all(users1)
 
-    console.log(result)
+    // console.log(result)
   }
  
   public modifyUser = async (params) => {
