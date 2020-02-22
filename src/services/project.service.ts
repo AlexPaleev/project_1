@@ -32,9 +32,9 @@ class ProjectService {
     }
   }
  
-  public modifyProject = async (request: express.Request) => {
-    const id = request.params.id;
-    const projectData: Project = request.body;
+  public modifyProject = async (params) => {
+    const id = params.id;
+    const projectData: Project = params.id;
     await this.projectRepository.update(id, projectData);
     const updatedProject = await this.projectRepository.findOne(id);
     if (updatedProject) {
