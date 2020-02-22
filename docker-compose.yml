@@ -1,5 +1,16 @@
 version: "3"
 services:
+
+  # server:
+  #   command: npm run debug
+  #   build: .
+  #   volumes:
+  #     - ./dist/src:/server/dist/src/ # same folder structure on local machine and docker container
+  #   ports:
+  #     - "3001:3001" # open port for server api
+  #     - "9222:9222" # open port for inspector to debug
+
+
   postgres:
     container_name: postgres3
     image: postgres:latest

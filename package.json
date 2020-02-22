@@ -2,7 +2,7 @@
   "name": "project_1",
   "version": "1.0.0",
   "description": "create Postgres DB",
-  "main": "app.ts",
+  "main": "server.ts",
   "scripts": {
     "dev": "ts-node ./src/server.ts"
   },

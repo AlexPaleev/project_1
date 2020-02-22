@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import Project from './project.entity';
 import User from './user.entity';
  
@@ -10,7 +10,7 @@ class Dev_project {
   @ManyToOne(() => User,(user: User) => user.Dprojects)
   public dev_: User;
 
-  @ManyToOne(() => Project,(program: Project) => program.dev_)
+  @ManyToOne(() => Project, (project: Project) => project.dev_)
   public project_: Project;
 }
  
