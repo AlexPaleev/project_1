@@ -1,4 +1,3 @@
-import * as express from 'express';
 import { getRepository } from 'typeorm';
 import CreateProjectDto from '../dto/project.dto';
 import Project from '../models/project.entity';
@@ -20,8 +19,8 @@ class ProjectService {
     return projects;
   }
  
-  public getProjectById = async (request: express.Request) => {
-    const id = request.params.id;
+  public getProjectById = async (params) => {
+    const id = params.id;
     const pm = await this.pmRepository.findOne(id);
     const project = await this.projectRepository.find({pm_: pm});
     if (project) {
@@ -32,9 +31,9 @@ class ProjectService {
     }
   }
  
-  public modifyProject = async (request: express.Request) => {
-    const id = request.params.id;
-    const projectData: Project = request.body;
+  public modifyProject = async (params) => {
+    const id = params.id;
+    const projectData: Project = params.id;
     await this.projectRepository.update(id, projectData);
     const updatedProject = await this.projectRepository.findOne(id);
     if (updatedProject) {
