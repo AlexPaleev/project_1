@@ -1,11 +1,11 @@
 import * as express from 'express';
 import Routers from '../interfaces/routers.interface';
-import RoleController from '../controllers/role.controller';
+import DevProjectController from '../controllers/dev-project.controller';
  
-class RoleRout implements Routers {
-  public path = '/role';
+class DevProjectRout implements Routers {
+  public path = '/dev_project';
   public router = express.Router();
-  private controll: RoleController = new RoleController();
+  private controll: DevProjectController = new DevProjectController();
  
   constructor() {
     this.initializeRoutes();
@@ -14,8 +14,9 @@ class RoleRout implements Routers {
   private initializeRoutes() {
     this.router.post(this.path, this.controll.create);
     this.router.get(this.path, this.controll.getAll);
+    this.router.get(`${this.path}/:id`, this.controll.getDevProjectByIdDev);
     this.router.delete(`${this.path}/:id`, this.controll.delete);
   }
 }
 
-export default RoleRout;
+export default DevProjectRout;

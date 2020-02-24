@@ -1,2 +1,3 @@
-# project_1
-first project
+# Project management system
+
+### command start a project - "npm run dev"
