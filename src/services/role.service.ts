@@ -2,10 +2,13 @@ import { getRepository } from 'typeorm';
 import Role from '../models/role.entity';
 
 class RoleService {
-  private roleRepository = getRepository(Role);
+  private roleRepository;
 
-  public createRole = async (body) => {
-    const roleData: Role = body;
+  constructor() {
+    this.roleRepository = getRepository(Role);
+  }
+
+  public createRole = async (roleData) => {
     const newRole = this.roleRepository.create(roleData);
     await this.roleRepository.save(newRole);
     return newRole;
@@ -16,11 +19,10 @@ class RoleService {
     return roles;
   }
  
-  public deleteRole = async (params) => {
-    const id = params.id;
+  public deleteRole = async (id) => {
     const deleteResponse = await this.roleRepository.delete(id);
     if (deleteResponse.affected !== 0) {
-      return 200;
+      return 'Ok';
     } else {
       return 'Error: No delete';
     }

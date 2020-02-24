@@ -1,16 +1,18 @@
-import * as express from 'express';
 import { getRepository } from 'typeorm';
-import CreateProjectDto from '../dto/project.dto';
 import Project from '../models/project.entity';
 import User from '../models/user.entity';
  
 class ProjectService {
-    private projectRepository = getRepository(Project);
-    private pmRepository = getRepository(User);
+    private projectRepository;
+    private pmRepository;
+
+    constructor() {
+      this.projectRepository = getRepository(Project);
+      this.pmRepository = getRepository(User);
+    }
 
   public createProject = async (body) => {
-    const projectData: CreateProjectDto = body;
-    const newProject = this.projectRepository.create(projectData);
+    const newProject = this.projectRepository.create(body);
     await this.projectRepository.save(newProject);
     return newProject;
   }
@@ -20,8 +22,7 @@ class ProjectService {
     return projects;
   }
  
-  public getProjectById = async (params) => {
-    const id = params.id;
+  public getProjectByIdPm = async (id) => {
     const pm = await this.pmRepository.findOne(id);
     const project = await this.projectRepository.find({pm_: pm});
     if (project.length !== 0) {
@@ -32,10 +33,8 @@ class ProjectService {
     }
   }
  
-  public modifyProject = async (request: express.Request) => {
-    const id = request.params.id;
-    const projectData: Project = request.body;
-    await this.projectRepository.update(id, projectData);
+  public modifyProject = async (id, body) => {
+    await this.projectRepository.update(id, body);
     const updatedProject = await this.projectRepository.findOne(id);
     if (updatedProject) {
       return updatedProject;
@@ -45,11 +44,10 @@ class ProjectService {
     }
   }
  
-  public deleteProject = async (params) => {
-    const id = params.id;
+  public deleteProject = async (id) => {
     const deleteResponse = await this.projectRepository.delete(id);
     if (deleteResponse.affected !== 0) {
-      return 200;
+      return 'Ok';
     } else {
       // next(new ProjectNotFoundException(id));
       return "Error: not found";
