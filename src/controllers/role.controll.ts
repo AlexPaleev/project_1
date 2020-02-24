@@ -16,7 +16,7 @@ class RoleController {
   }
  
   public CallDeleteRole = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
-    let deleteResponse = await this.service.deleteRole(request.body);
+    let deleteResponse = await this.service.deleteRole(request.params);
     response.send(deleteResponse);
   }
 }

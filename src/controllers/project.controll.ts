@@ -16,12 +16,12 @@ class ProjectController {
   }
  
   public CallGetProjectById = async (request: express.Request, response: express.Response) => {
-    let project = await this.service.getProjectById(request.body);
+    let project = await this.service.getProjectById(request.params);
     response.send(project);
   }
  
   public CallModifyProject = async (request: express.Request, response: express.Response) => {
-    let updatedProject = await this.service.modifyProject(request.body);
+    let updatedProject = await this.service.modifyProject(request);
     response.send(updatedProject);
   }
  

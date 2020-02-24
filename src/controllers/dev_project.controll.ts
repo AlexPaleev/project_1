@@ -15,7 +15,7 @@ class Dev_projectController {
   }
  
   public CallGetDev_projectById = async (request: express.Request, response: express.Response) => {
-    let project = await this.service.getDev_projectById(request.body);
+    let project = await this.service.getDev_projectById(request.params);
     response.send(project);
   }
  

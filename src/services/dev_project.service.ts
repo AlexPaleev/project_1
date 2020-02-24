@@ -19,13 +19,13 @@ class Dev_projectService {
   }
 
   public getDev_projectById = async (params) => {
-    const id = params.id;
-    const dev = await this.devRepository.findOne(id);
+    const idDev = params.id;
+    const dev = await this.devRepository.findOne({id:JSON.parse(idDev)});
     const dev_project = await this.dev_projectRepository.find({dev_: dev});
-    if (dev_project) {
+    if (dev_project.length !== 0) {
       return dev_project;
     } else {
-      return 'Error: Not found id';
+      return 'Error: Not found';
     }
   }
  
