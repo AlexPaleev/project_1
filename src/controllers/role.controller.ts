@@ -3,18 +3,14 @@ import RoleService from '../services/role.service';
 
 
 class RoleController {
-    private service;
-
-    constructor() {
-      this.service = new RoleService();
-    }
+    private service: RoleService = new RoleService();
 
   public create = async (request: express.Request, response: express.Response) => {
     let newUser = await this.service.createRole(request.body);
     response.send(newUser);
   }
  
-  public getAll = async (response: express.Response) => {
+  public getAll = async (request: express.Request, response: express.Response) => {
     let projects = await this.service.getAllRoles();
     response.send(projects);
   }

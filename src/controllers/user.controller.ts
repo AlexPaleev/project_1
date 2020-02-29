@@ -3,23 +3,19 @@ import UserService from '../services/user.service';
 
 
 class UserController {
-    private service;
-
-    constructor() {
-      this.service = new UserService();
-    }
+    private service: UserService = new UserService();
 
   public createUser = async (request: express.Request, response: express.Response) => {
     let newUser = await this.service.createUser(request.body);
     response.send(newUser);
   }
  
-  public getAllUsers = async (response: express.Response) => {
+  public getAllUsers = async (request: express.Request, response: express.Response) => {
     let users = await this.service.getAllUsers();
     response.send(users);
   }
  
-  public getAllDevs = async (response: express.Response) => {
+  public getAllDevs = async (request: express.Request, response: express.Response) => {
     let devs = await this.service.getAllDevs();
     response.send(devs);
   }

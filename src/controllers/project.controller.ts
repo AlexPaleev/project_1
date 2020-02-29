@@ -3,18 +3,14 @@ import ProjectService from '../services/project.service';
 
 
 class ProjectController {
-    private service;
-
-    constructor() {
-      this.service = new ProjectService();
-    }
+    private service: ProjectService = new ProjectService();
 
   public create = async (request: express.Request, response: express.Response) => {
     let newProject = await this.service.createProject(request.body);
     response.send(newProject);
   }
  
-  public getAll = async (response: express.Response) => {
+  public getAll = async (request: express.Request, response: express.Response) => {
     let projects = await this.service.getAllProjects();
     response.send(projects);
   }

@@ -2,18 +2,14 @@ import * as express from 'express'; //
 import DevProjectService from '../services/dev-project.service';
 
 class DevProjectController {
-    private service;
-
-    constructor() {
-      this.service = new DevProjectService();
-    }
+    private service: DevProjectService = new DevProjectService();
 
   public create = async (request: express.Request, response: express.Response) => {
     let newProject = await this.service.createDevProject(request.body);
     response.send(newProject);
   }
  
-  public getAll = async (response: express.Response) => {
+  public getAll = async (request: express.Request, response: express.Response) => {
     let projects = await this.service.getAllDevProjects();
     response.send(projects);
   }
