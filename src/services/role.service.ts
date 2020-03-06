@@ -1,3 +1,4 @@
+import * as express from 'express';
 import { getRepository } from 'typeorm';
 import Role from '../models/role.entity';
 

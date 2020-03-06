@@ -5,7 +5,7 @@ import App from './app';
 import config from './ormconfig';
 import UserRout from './routes/user.rout';
 import ProjectRout from './routes/project.rout';
-import Dev_projectRout from './routes/dev-project.rout';
+import DevProjectRout from './routes/dev-project.rout';
 import RoleRout from './routes/role.rout';
  
 (async () => {
@@ -17,10 +17,10 @@ import RoleRout from './routes/role.rout';
   }
   const app = new App(
     [
-      new UserRout, 
-      new ProjectRout,
-      new Dev_projectRout,
-      new RoleRout
+      new UserRout(), 
+      new ProjectRout(),
+      new DevProjectRout(),
+      new RoleRout()
     ],
     5000
   );

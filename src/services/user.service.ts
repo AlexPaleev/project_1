@@ -1,3 +1,4 @@
+import * as express from 'express';
 import { getRepository } from 'typeorm';
 import User from '../models/user.entity';
 
@@ -8,10 +9,15 @@ class UserService {
     this.userRepository = getRepository(User);
   }
 
-  public createUser = async (userData) => {
-    const newUser = this.userRepository.create(userData);
-    await this.userRepository.save(newUser);
-    return newUser;
+  public createUser = async (userData: User) => {
+    const result = await this.userRepository.findOne(userData)
+    if (result) {
+      return "That user already exists!"
+    } else {
+      const newUser = this.userRepository.create(userData);
+      await this.userRepository.save(newUser);
+      return newUser;
+    }
   }
 
   public getAllUsers = async () => {

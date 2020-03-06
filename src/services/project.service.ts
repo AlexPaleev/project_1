@@ -1,3 +1,4 @@
+import * as express from 'express';
 import { getRepository } from 'typeorm';
 import Project from '../models/project.entity';
 import User from '../models/user.entity';
