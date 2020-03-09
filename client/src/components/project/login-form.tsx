@@ -55,8 +55,8 @@ export const LoginForm = observer(props => (
     //   <div id="dropDownSelect1"></div>
     // </div>
 
-    <div>
-      <h1>Login</h1>
+    <div className="login">
+      <h1>LOGIN</h1>
       <form action = "/login" method = "POST">
           <div>
               <label placeholder = "email">Email</label>
@@ -68,7 +68,7 @@ export const LoginForm = observer(props => (
           </div>
           <button type="submit">Login</button>
       </form>
-      <a href="/register">Register</a>
+      <p>Don't have an account?<a href="/register"> Signup</a></p>
     </div>
     
 ) )
