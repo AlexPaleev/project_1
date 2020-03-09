@@ -29,9 +29,9 @@ class App extends React.Component {
               <Route path="/register">
                 <RegisterForm />
               </Route>
-              {/* <Route path="/project">
+              <Route path="/project">
                 <ProjectList  />
-              </Route> */}
+              </Route>
               <Route path="/">
                 <LoginForm model />
               </Route>
