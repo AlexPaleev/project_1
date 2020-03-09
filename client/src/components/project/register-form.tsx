@@ -7,11 +7,19 @@ import '../../App.css';
 
 
 export const RegisterForm = observer(props => (
-    <div>
-        <h1>Register</h1>
+    <div className="register">
+        <h1>SIGNUP</h1>
         <form action = "/register" method = "POST">
             <div>
-                <label placeholder = "name">Name</label>
+                <label placeholder = "name">firstName</label>
+                <input type = "text" id = "name" name ="name" required/>
+            </div>
+            <div>
+                <label placeholder = "name">lastName</label>
+                <input type = "text" id = "name" name ="name" required/>
+            </div>
+            <div>
+                <label placeholder = "name">Role</label>
                 <input type = "text" id = "name" name ="name" required/>
             </div>
             <div>
@@ -22,9 +30,13 @@ export const RegisterForm = observer(props => (
                 <label placeholder = "password">Password</label>
                 <input type="password" id="password" name="password" required/>
             </div>
+            <div>
+                <label placeholder = "password">ConfirmPassword</label>
+                <input type="password" id="password" name="password" required/>
+            </div>
             <button type="submit">Register</button>
         </form>
-        <a href="/login">Login</a>
+        <p>Already onboard?<a href="/login"> Login</a></p>
     </div>
     
 ) )
